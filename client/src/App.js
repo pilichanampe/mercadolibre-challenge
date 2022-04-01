@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from "react-router-dom";
 
 function App() {
-
   const [backendData, setBackendData] = useState([])
   useEffect(() => {
     axios.get('/api')
@@ -10,7 +10,6 @@ function App() {
         setBackendData(res.data.users)
       })
   }, [])
-
 
   return (
     <div>
@@ -20,7 +19,8 @@ function App() {
           return <p key={user}>{ user }</p>
         })
       }
-      mierda carajo
+      <Link to="/product-detail">Product detail</Link> |{" "}
+      <Link to="/search-results">Search results</Link>
     </div>
   )
 }
