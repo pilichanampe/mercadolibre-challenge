@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import API_SERVICE from './services/api.service';
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { theme } from './styles/theme';
@@ -8,12 +9,16 @@ import { Button } from './components/basecomponents/Button';
 import Navbar from './components/Navbar';
 
 function App() {
-  const [backendData, setBackendData] = useState([])
+  const [backendData, setBackendData] = useState([]);
+  const inputClient = 'ipod con cable';
+
   useEffect(() => {
-    axios.get('/api')
+    API_SERVICE.init();
+    axios.get(`/sites/MLA/search?q=${inputClient}`)
       .then(res => {
-        setBackendData(res.data.users)
-      })
+        setBackendData(res);
+        console.log(backendData)
+;      })
   }, [])
 
   return (
