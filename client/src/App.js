@@ -7,18 +7,19 @@ import { theme } from './styles/theme';
 import { GlobalStyle } from './styles/GlobalStyle';
 import { Button } from './components/basecomponents/Button';
 import Navbar from './components/Navbar';
+import { useProductsContext } from './context/ProductsContext';
 
 function App() {
-  const [backendData, setBackendData] = useState([]);
+  // const { products } = useProductsContext();
   const inputClient = 'ipod con cable';
 
   useEffect(() => {
-    API_SERVICE.init();
-    axios.get(`/sites/MLA/search?q=${inputClient}`)
-      .then(res => {
-        setBackendData(res);
-        console.log(backendData)
-;      })
+    // API_SERVICE.init();
+//     axios.get(`/sites/MLA/search?q=${inputClient}`)
+//       .then(res => {
+//         // setBackendData(res);
+//         // console.log(backendData)
+// ;      })
   }, [])
 
   return (
@@ -26,9 +27,6 @@ function App() {
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Navbar></Navbar>
-            <Link to="/product-detail">Product detail</Link> |{" "}
-            <Link to="/search-results">Search results</Link>
-            <Button>Holis</Button>
           </ThemeProvider>
     </div>
   )

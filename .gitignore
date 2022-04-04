@@ -26,8 +26,8 @@ client/yarn-error.log*
 server/node_modules
 server/dist
 
-# local env files
-server/.env.local
+# env files
+server/.env
 server/.env.*.local
 
 # Log files

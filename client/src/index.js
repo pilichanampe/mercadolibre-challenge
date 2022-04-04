@@ -10,16 +10,19 @@ import {
 } from "react-router-dom";
 import ProductDetail from './views/ProductDetail';
 import SearchResults from './views/SearchResults';
+import { ProductsProvider } from './context/ProductsContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/product-detail" element={<ProductDetail />} />
-        <Route path="/search-results" element={<SearchResults />} />
-      </Routes>
-    </BrowserRouter>
+    <ProductsProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/product-detail" element={<ProductDetail />} />
+          <Route path="/search-results" element={<SearchResults />} />
+        </Routes>
+      </BrowserRouter>
+    </ProductsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
