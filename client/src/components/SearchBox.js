@@ -53,7 +53,8 @@ function SearchBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const params = {
-      q: searchQuery
+      q: searchQuery,
+      limit: 4,
     }
     axios.get('/api/items', { params }).then((response) => {
       console.log(response.data);

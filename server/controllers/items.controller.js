@@ -17,8 +17,35 @@ const author = {
   lastname: 'Chanampe',
 }
 
-const getDecimals = (n) => {
-  return Number((n % 1).toFixed(2));
+const getDecimals = (price) => {
+  return Number((price % 1).toFixed(2));
+}
+
+const getCategories = (filters) => {
+  let categoriesList = [];
+  if (filters.length) {
+    const categoriesObj = filters?.filter(filter => filter.id === 'category');
+    categoriesList = categoriesObj[0].values?.map(category => category.name);
+  }
+  return categoriesList;
+}
+
+const getItems = (results) => {
+  const items = results?.map(item => {
+    return {
+      id: item.id,
+      title: item.title,
+      price: {
+        currrency: item.currency_id,
+        amount: item.price,
+        decimals: getDecimals(item.price),
+      },
+      picture: item.thumbnail,
+      condition: item.condition,
+      free_shipping: item.shipping.free_shipping,
+    }
+  });
+  return items;
 }
 
 const getSearchResults = async (req = request, res = response) => {
@@ -27,26 +54,12 @@ const getSearchResults = async (req = request, res = response) => {
   try {
     const apiResponse = await axiosInstance.get(requestUrl);
     const results = apiResponse.data.results;
-    
-    const products = results?.map(product => {
-      return {
-        id: product.id,
-        title: product.title,
-        price: {
-          currrency: product.currency_id,
-          amount: product.price,
-          decimals: getDecimals(product.price),
-        },
-        picture: product.thumbnail,
-        condition: product.condition,
-        free_shipping: product.shipping.free_shipping,
-      }
-    })
+    const filters = apiResponse.data.filters;
 
     const finalResponse = {
       author,
-      categories: 'falta hacer',
-      items: products,      
+      categories: getCategories(filters),
+      items: getItems(results),      
     }
     res.status(200).json(finalResponse)
   } catch(error) {
