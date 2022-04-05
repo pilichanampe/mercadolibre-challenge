@@ -56,24 +56,41 @@ function SearchBox() {
       q: searchQuery
     }
     axios.get('/api/items', { params }).then((response) => {
-      console.log(response);
+      console.log(response.data);
     })
   }
+
+  const getItem = () => {
+    console.log('hice click')
+    const id = 'MLA1130139998';
+
+    axios.get(`/api/items/${id}`).then((response) => {
+      console.log(response.data);
+    })    
+  }
+
   return (
-    <InputBox
-      as="form"
-      onSubmit={handleSubmit}
-    >
-      <Input onChange={e => setSearchQuery(e.target.value)}></Input>
-      <SearchButton
-        as="button"
-        height="100%"
+    <>
+      <InputBox
+        as="form"
+        onSubmit={handleSubmit}
       >
-      <Image
-        src={SearchLogo}
-      ></Image>
-      </SearchButton>
-    </InputBox>
+        <Input onChange={e => setSearchQuery(e.target.value)}></Input>
+        <SearchButton
+          as="button"
+          height="100%"
+        >
+        <Image
+          src={SearchLogo}
+          ></Image>
+        </SearchButton>
+      </InputBox>
+      <button
+        onClick={getItem}
+      >
+        Dame el item
+      </button>
+    </>
   )
 };
 

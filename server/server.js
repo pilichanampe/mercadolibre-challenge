@@ -14,14 +14,7 @@ app.use(cors());
 app.set('port', process.env.PORT || 5000);
 
 // routes
-app.use('/api/items', require('./routes/products.route'));
-
-app.get('/', (req, res) => {
-  res.set({
-    'Content-Type': 'text/plain',
-  })
-  res.send('Hello World!')
-})
+app.use('/api/items', require('./routes/items.route'));
 
 app.listen(app.get('port'), () => {
   console.log('Server started on server', app.get('port'));
