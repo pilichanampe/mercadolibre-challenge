@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from "styled-components";
+import { theme } from './styles/theme';
+import { GlobalStyle } from './styles/GlobalStyle';
+import Navbar from './components/Navbar';
+
 import {
   BrowserRouter,
   Routes,
@@ -13,17 +18,21 @@ import SearchResults from './views/SearchResults';
 import { ProductsProvider } from './context/ProductsContext';
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <ProductsProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/product-detail" element={<ProductDetail />} />
-          <Route path="/search-results" element={<SearchResults />} />
-        </Routes>
-      </BrowserRouter>
-    </ProductsProvider>
-  </React.StrictMode>,
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <BrowserRouter>
+            <Navbar></Navbar>
+            <Routes>
+              <Route path="/" element={<App />} />
+              <Route path="/items/:id" element={<ProductDetail />} />
+              <Route path="/items" element={<SearchResults />} />
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
+    </ProductsProvider>,
+  // </React.StrictMode>,
   document.getElementById('root')
 );
 

@@ -18,15 +18,19 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center;
     width: 100%;
+    height: 100%;
     margin-right: auto;
     margin-left: auto;
     overflow-x: hidden;
+    background-color: ${props => props.theme.colors.n100};
   }
 
   #root {
     width: 100%;
+    height: inherit;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    /* justify-content: center; */
     align-items: center;
   }
   

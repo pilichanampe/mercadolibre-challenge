@@ -13,7 +13,7 @@ const Nav = styled(Box)`
   width: 100%;
   align-items: center;
   background: ${({ theme }) => theme.colors.brandDefault};
-  position: fixed;
+  position: relative;
   z-index: 2;
   padding: 24px;
   top: 0;

@@ -8,7 +8,7 @@ export const Card = styled(Box)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.n0}
+  background-color: ${({ theme }) => theme.colors.n0};
   ${space};
   ${flexbox};
   ${layout};

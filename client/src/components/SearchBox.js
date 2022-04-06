@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import { Card } from './basecomponents/Card';
 import { Image } from './basecomponents/Image';
@@ -6,7 +6,7 @@ import SearchLogo from '../assets/icons/ic_Search.png';
 import { Box } from './basecomponents/Box';
 import { useProductsContext } from '../context/ProductsContext';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams, useNavigate } from 'react-router-dom';
 
 const InputBox = styled(Card)`
   height: 32px;
@@ -24,8 +24,8 @@ const Input = styled.input`
   display: flex;
   width: 100%;
   height: inherit;
-  padding-left: 6px;
-  padding-right: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
   border: none;
   border-radius: inherit;
   &:focus {
@@ -48,35 +48,39 @@ const SearchButton = styled.button`
 `;
 
 function SearchBox() {
-  const { searchQuery, setSearchQuery } = useProductsContext();
+  const navigate = useNavigate();
+  const { searchQuery, setSearchQuery, limit } = useProductsContext();
+  const { getSearchResults, products } = useProductsContext();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const params = {
       q: searchQuery,
-      limit: 4,
+      limit,
     }
-    axios.get('/api/items', { params }).then((response) => {
-      console.log(response.data);
-    })
+    console.log(params)
+    await getSearchResults(params);
+    navigate(`/items?search=${searchQuery}`);
+    // setSearchParams({ search: searchQuery});
   }
 
-  const getItem = () => {
-    console.log('hice click')
-    const id = 'MLA1130139998';
-
-    axios.get(`/api/items/${id}`).then((response) => {
-      console.log(response.data);
-    })    
-  }
+  useEffect(() => {  
+    return () => {
+    }
+  }, [products])
+  
 
   return (
     <>
       <InputBox
         as="form"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit}        
       >
-        <Input onChange={e => setSearchQuery(e.target.value)}></Input>
+        <Input
+          onChange={e => setSearchQuery(e.target.value)}
+          placeholder="Nunca dejes de buscar"
+        ></Input>
         <SearchButton
           as="button"
           height="100%"
@@ -86,11 +90,6 @@ function SearchBox() {
           ></Image>
         </SearchButton>
       </InputBox>
-      <button
-        onClick={getItem}
-      >
-        Dame el item
-      </button>
     </>
   )
 };
