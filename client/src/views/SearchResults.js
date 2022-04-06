@@ -38,7 +38,7 @@ function SearchResults() {
       console.log('products en SearchResults', products);
       console.log('results en SearchResults', results);
     }
-  }, [products]);
+  }, [searchParams]);
   
   const goToProductDetail = () => {
     navigate(`/items/${itemId}`)
@@ -46,11 +46,13 @@ function SearchResults() {
 
   return (
     <div>
-      <Button
-        onClick={() => goToProductDetail()}
-      >
-        Ver el item {itemId}
-      </Button>
+      {products &&
+        <Button
+          onClick={() => goToProductDetail()}
+        >
+          {products.items[0].title}
+        </Button>      
+      }
     </div>
   )
 }

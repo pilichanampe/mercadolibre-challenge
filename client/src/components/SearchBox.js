@@ -65,10 +65,10 @@ function SearchBox() {
     // setSearchParams({ search: searchQuery});
   }
 
-  useEffect(() => {  
-    return () => {
-    }
-  }, [products])
+  // useEffect(() => {  
+  //   return () => {
+  //   }
+  // }, [searchParams])
   
 
   return (

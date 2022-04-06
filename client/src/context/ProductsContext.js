@@ -30,7 +30,6 @@ export function ProductsProvider({ children }) {
     const apiResponse = await axios.get('api/items', { params });
     await setProducts(apiResponse.data);
     console.log('products en context', products);
-    return products;
   }
 
   useEffect(() => {
