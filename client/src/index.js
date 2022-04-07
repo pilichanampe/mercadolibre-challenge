@@ -18,21 +18,21 @@ import SearchResults from './views/SearchResults';
 import { ProductsProvider } from './context/ProductsContext';
 
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
     <ProductsProvider>
         <ThemeProvider theme={theme}>
           <GlobalStyle />
           <BrowserRouter>
             <Navbar></Navbar>
             <Routes>
-              <Route path="/" element={<App />} />
-              <Route path="/items/:id" element={<ProductDetail />} />
-              <Route path="/items" element={<SearchResults />} />
+              <Route exact path="/" element={<App />} />
+              <Route exact path="/items/:id" element={<ProductDetail />} />
+              <Route exact path="/items" element={<SearchResults />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>
-    </ProductsProvider>,
-  // </React.StrictMode>,
+    </ProductsProvider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

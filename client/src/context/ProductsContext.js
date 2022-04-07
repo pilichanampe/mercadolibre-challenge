@@ -11,30 +11,43 @@ export function ProductsProvider({ children }) {
   const [searchParams, setSearchParams] = useState();
   const [itemId, setItemId] = useState('MLA1130139998');
   const [limit, setLimit] = useState(4);
+  const [item, setItem] = useState();
+  const [loading, setLoading] = useState();
+  const [price, setPrice] = useState();
   
-  const getItem = async () => {
-    // setItemId(id);
-    axios.get(`/api/items/${itemId}`).then((response) => {
-      console.log(response.data);
-    })    
+  const getItem = async (id) => {
+    setItemId(id);
+    setLoading(true);
+    axios.get(`/api/items/${id}`).then((response) => {  
+      setLoading(false);    
+      setItem(response.data);
+      setPrice(response.data.price.amount);
+    }).catch((error) => {
+      setLoading(false);    
+      return error;
+    }).finally(() => {
+      setLoading(false);
+    }) 
   };
 
-  // const getSearchResults = (params) => {
-  //   axios.get('/api/items', { params }).then((response) => {
-  //     console.log(response.data);
-  //     setProducts(response.data);
-  //     console.log(products);
-  //   })
-  // }
+
+
   const getSearchResults = async (params) => {
-    const apiResponse = await axios.get('api/items', { params });
-    await setProducts(apiResponse.data);
-    console.log('products en context', products);
+    try {
+      const apiResponse = await axios.get('api/items', { params });
+      await setProducts(apiResponse.data.items);
+      await setCategories(apiResponse.data.categories);
+
+    } catch(error) {
+      throw new Error(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
 
-  }, [products])
+  }, [products, categories])
   
 
   return (
@@ -54,6 +67,12 @@ export function ProductsProvider({ children }) {
         getSearchResults,
         limit,
         setLimit,
+        item,
+        setItem,
+        loading,
+        setLoading,
+        price,
+        setPrice,
       }}
     >
       {children}

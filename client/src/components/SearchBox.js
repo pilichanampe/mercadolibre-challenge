@@ -17,7 +17,6 @@ const InputBox = styled(Card)`
   align-items: center;
   padding: 0;
   margin: 0;
-  /* border: 2px solid green; */
 `;
 
 const Input = styled.input`
@@ -59,7 +58,7 @@ function SearchBox() {
       q: searchQuery,
       limit,
     }
-    console.log(params)
+    console.log(searchParams.getAll)
     await getSearchResults(params);
     navigate(`/items?search=${searchQuery}`);
     // setSearchParams({ search: searchQuery});

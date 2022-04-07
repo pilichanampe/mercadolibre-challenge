@@ -25,7 +25,7 @@ const getCategories = (filters) => {
   let categoriesList = [];
   if (filters.length) {
     const categoriesObj = filters?.filter(filter => filter.id === 'category');
-    categoriesList = categoriesObj[0].values?.map(category => category.name);
+    categoriesList = categoriesObj[0].values[0]['path_from_root'].map(category => category.name);
   }
   return categoriesList;
 }
@@ -43,6 +43,7 @@ const getItems = (results) => {
       picture: item.thumbnail,
       condition: item.condition,
       free_shipping: item.shipping.free_shipping,
+      city: item.address.state_name,
     }
   });
   return items;
@@ -88,7 +89,7 @@ const getItem = async (req = request, res = response) => {
           amount: item.price,
           decimals: getDecimals(item.price),
         },
-        picture: 'buscar foto',
+        picture: item.pictures.secure_url,
         condition: item.condition,
         free_shipping: item.shipping.free_shipping,
         sold_quantity: item.sold_quantity,
@@ -96,7 +97,7 @@ const getItem = async (req = request, res = response) => {
     };
     res.status(200).json(finalResponse)
   } catch(error) {
-    res.status(500).json({error});
+    res.status(error.status).json({error});
   }
 };
 

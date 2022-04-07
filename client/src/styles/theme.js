@@ -22,8 +22,8 @@ export const theme = {
     xs: '24px',
   },
   spaces: {
-    md: '16px',
-    sm: '32px',
+    sm: '16px',
+    md: '32px',
   },
   breakpoints: {
     lg: '1920px',

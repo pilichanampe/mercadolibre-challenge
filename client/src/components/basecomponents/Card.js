@@ -9,6 +9,7 @@ export const Card = styled(Box)`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.n0};
+  width: 100%;
   ${space};
   ${flexbox};
   ${layout};

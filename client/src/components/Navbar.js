@@ -5,6 +5,7 @@ import { Spacer } from './basecomponents/Spacer';
 import { Image } from './basecomponents/Image';
 import Logo from '../assets/icons/Logo_ML.png';
 import SearchBox from './SearchBox';
+import { Container } from './basecomponents/Container';
 
 const Nav = styled(Box)`
   display: flex;
@@ -25,10 +26,9 @@ function Navbar() {
   return (
     <Nav as="nav">
       <Box
-        as="a"
         display="flex" 
         alignItems="center"
-        width="1184px"       
+        width="1184px"
       >
         <Image
           width="44px"
@@ -36,7 +36,7 @@ function Navbar() {
           alt="MercadoLibre logo"
           mr={4}
         ></Image>
-        <SearchBox border="2px solid red"></SearchBox>
+        <SearchBox></SearchBox>
       </Box>
     </Nav>
   );
