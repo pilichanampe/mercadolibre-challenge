@@ -44,11 +44,6 @@ function SearchResults() {
       getResults();
     }
   }, [products, categories, loading]);
-  
-  const goToProductDetail = async (id) => {
-    await getItem(id);
-    navigate(`/${id}`);
-  }
 
   return (
     <Container
@@ -60,10 +55,10 @@ function SearchResults() {
         (loading) &&
         <Loading></Loading>
       }
-      {
+      {/* {
         (!products && !loading) &&
         <Span1 mt="4">!Ups! No encontramos el producto que estás buscando. Por favor, probá con una nueva búsqueda :).</Span1>
-      }
+      } */}
       {
         (products && !loading) &&  
         <Box
@@ -78,8 +73,9 @@ function SearchResults() {
               products.map((product) => {
                 return (
                   <StyledLink
-                    key={product.id}
-                    to={`/items/${product.id}`}>
+                  to={`/items/${product.id}`}
+                  key={product.id}
+                  >
                     <ProductCard
                       item={product}                      
                     ></ProductCard>

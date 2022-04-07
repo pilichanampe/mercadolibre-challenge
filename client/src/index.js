@@ -7,7 +7,6 @@ import { ThemeProvider } from "styled-components";
 import { theme } from './styles/theme';
 import { GlobalStyle } from './styles/GlobalStyle';
 import Navbar from './components/Navbar';
-
 import {
   BrowserRouter,
   Routes,
@@ -25,9 +24,9 @@ ReactDOM.render(
           <BrowserRouter>
             <Navbar></Navbar>
             <Routes>
-              <Route exact path="/" element={<App />} />
-              <Route exact path="/items/:id" element={<ProductDetail />} />
-              <Route exact path="/items" element={<SearchResults />} />
+              <Route path="/" element={<App />} />
+              <Route path="/items/:id" element={<ProductDetail />} />
+              <Route path="/items" element={<SearchResults />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

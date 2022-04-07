@@ -35,17 +35,18 @@ const Description = styled(Box)`
 function ProductDetail() {
   const { item, getItem, categories, setItem, loading, setLoading, price } = useProductsContext();
   const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
     if (!item) {
       setLoading(true);
       const getProductDetail = async () => {
-        const { id } = params;
+        // const { id } = params;
         await setItem(getItem(id));
       }
       getProductDetail();
     }
-  }, [item, categories, loading]);
+  }, [item, categories, loading, params]);
 
   return (
     <Container

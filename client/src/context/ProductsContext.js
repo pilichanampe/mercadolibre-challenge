@@ -47,7 +47,7 @@ export function ProductsProvider({ children }) {
 
   useEffect(() => {
 
-  }, [products, categories])
+  }, [products, categories, item])
   
 
   return (
