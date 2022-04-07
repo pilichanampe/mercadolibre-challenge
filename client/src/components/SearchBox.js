@@ -58,7 +58,6 @@ function SearchBox() {
       q: searchQuery,
       limit,
     }
-    console.log(searchParams.getAll)
     await getSearchResults(params);
     navigate(`/items?search=${searchQuery}`);
     // setSearchParams({ search: searchQuery});

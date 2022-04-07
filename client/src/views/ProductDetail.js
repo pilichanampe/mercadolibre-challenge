@@ -109,7 +109,7 @@ function ProductDetail() {
                 <Span2
                   fontSize="sm2"
                   mb="3"
-                >{item.condition ? 'Nuevo' : 'Usado'} - {item.sold_quantity} vendidos</Span2>
+                >{item.condition === 'new' ? 'Nuevo' : 'Usado'} - {item.sold_quantity} vendidos</Span2>
                 <Span1>{item.title}</Span1>
                 <Span1
                   fontSize="lg1"

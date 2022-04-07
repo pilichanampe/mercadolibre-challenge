@@ -69,8 +69,6 @@ const getSearchResults = async (req = request, res = response) => {
 };
 
 const getItem = async (req = request, res = response) => {
-  // console.log(url.parse(req.url, true));
-  console.log(`${API_MELI_BASE_URL}/items/${req.params.id}`);
   const itemUrl = `${API_MELI_BASE_URL}/items/${req.params.id}`;
   const descriptionUrl = `${API_MELI_BASE_URL}/items/${req.params.id}/description`;
   try {
@@ -89,7 +87,7 @@ const getItem = async (req = request, res = response) => {
           amount: item.price,
           decimals: getDecimals(item.price),
         },
-        picture: item.pictures.secure_url,
+        picture: item.pictures[0].secure_url,
         condition: item.condition,
         free_shipping: item.shipping.free_shipping,
         sold_quantity: item.sold_quantity,
@@ -97,7 +95,7 @@ const getItem = async (req = request, res = response) => {
     };
     res.status(200).json(finalResponse)
   } catch(error) {
-    res.status(error.status).json({error});
+    res.status(500).json({error});
   }
 };
 
