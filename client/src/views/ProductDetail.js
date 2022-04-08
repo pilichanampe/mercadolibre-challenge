@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useSearchParams, Link, useNavigate} from 'react-router-dom';
+import React, { useEffect } from 'react'
+import { useParams, useSearchParams, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import { Box } from '../components/basecomponents/Box';
 import BreadCrumbs from '../components/basecomponents/BreadCrumbs'
@@ -43,7 +43,7 @@ const Description = styled(Box)`
 `;
 
 function ProductDetail() {
-  const { item, getItem, categories, setItem, loading, setLoading, price, getSearchResults } = useProductsContext();
+  const { item, getItem, categories, setItem, loading, setLoading, price } = useProductsContext();
   const params = useParams();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

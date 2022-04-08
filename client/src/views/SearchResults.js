@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSearchParams, useNavigate, Link } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/ProductsContext';
 import ProductCard from '../components/basecomponents/ProductCard';
 import { Box } from '../components/basecomponents/Box';
@@ -20,7 +20,7 @@ const ProductsWrapper = styled(Box)`
 
 function SearchResults() {
   const navigate = useNavigate();
-  const { item, products, setProducts, getSearchResults, limit, categories, setCategories, loading, setLoading } = useProductsContext();
+  const { item, products, setProducts, getSearchResults, limit, categories, loading, setLoading } = useProductsContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const goToDetail = (productId) => {

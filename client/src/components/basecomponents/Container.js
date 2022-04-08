@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { compose, flexbox, color, space, layout, background, border, position, shadow } from "styled-system";
+import { flexbox, color, space, layout, background, border, position, shadow } from "styled-system";
 import { Box } from "./Box";
 
 export const Container = styled(Box)`

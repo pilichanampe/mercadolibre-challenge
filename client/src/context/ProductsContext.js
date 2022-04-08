@@ -9,14 +9,12 @@ export function ProductsProvider({ children }) {
   const [allProducts, setAllProducts] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [searchParams, setSearchParams] = useState();
-  const [itemId, setItemId] = useState('MLA1130139998');
   const [limit, setLimit] = useState(4);
   const [item, setItem] = useState();
   const [loading, setLoading] = useState();
   const [price, setPrice] = useState();
   
   const getItem = async (id) => {
-    setItemId(id);
     setLoading(true);
     axios.get(`/api/items/${id}`).then((response) => {  
       setLoading(false);    

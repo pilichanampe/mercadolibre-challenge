@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { Card } from './basecomponents/Card';
 import { Image } from './basecomponents/Image';
 import SearchLogo from '../assets/icons/ic_Search.png';
-import { Box } from './basecomponents/Box';
 import { useProductsContext } from '../context/ProductsContext';
-import axios from 'axios';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const InputBox = styled(Card)`
   height: 32px;
