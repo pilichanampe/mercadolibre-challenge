@@ -23,7 +23,9 @@ function App() {
           <Span1>¡Te damos la bienvenida a Mercado Libre Argentina! Buscá ese producto que querés :).</Span1>
           <Image
             alt="Imagen de Mercado Libre"
-            mt="100px" 
+            mt="100px"
+            width="100%"
+            maxWidth="600px"
             src={Meli}
           />
 

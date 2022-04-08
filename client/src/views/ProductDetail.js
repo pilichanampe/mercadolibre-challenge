@@ -53,7 +53,11 @@ function ProductDetail() {
       setLoading(true);
       const getProductDetail = async () => {
         const { id } = params;
-        await setItem(() => getItem(id));
+        try {
+          await setItem(() => getItem(id));
+        } catch {
+          navigate('/');
+        }
       }
       getProductDetail();
       console.log(item);
@@ -61,93 +65,95 @@ function ProductDetail() {
   }, [item, categories, loading, params, searchParams]);
 
   return (
-    <Container
-      as="main"
-      pt="0"
-    >
-      {
-        loading &&
-        <Loading></Loading>
-      }
+    <>
       {
         ((typeof item !== 'object') && !loading) &&
         <ErrorPage></ErrorPage>
       }
-      {
-        (typeof item === 'object' && !loading) &&
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          width="1184px"
-        >
+      <Container
+        as="main"
+        pt="0"
+      >
+        {
+          loading &&
+          <Loading></Loading>
+        }
+        {
+          (typeof item === 'object' && !loading) &&
           <Box
-            alignSelf="start"
             display="flex"
-            width="100%"
+            flexDirection="column"
+            alignItems="center"
+            width="1184px"
           >
-            <BackToList onClick={() => navigate(-1)}>Volver al listado</BackToList>
-            <BreadCrumbs />
-          </Box>
-          <Card>
-            <Product>
-              <Box
-                display="flex"
-                flexDirection="column"
-                flex="1"
-                p="4"
-                minHeight="600p"
-              >
+            <Box
+              alignSelf="start"
+              display="flex"
+              width="100%"
+            >
+              <BackToList onClick={() => navigate(-1)}>Volver al listado</BackToList>
+              <BreadCrumbs />
+            </Box>
+            <Card>
+              <Product>
                 <Box
-                  height="600px"
-                  width="700px"
                   display="flex"
-                  justifyContent="center"
-                  alignItems="center"
+                  flexDirection="column"
+                  flex="1"
+                  p="4"
+                  minHeight="600p"
                 >
-                  <Image
-                    alt="Imagen del producto"
-                    src={item.picture}
+                  <Box
+                    height="600px"
+                    width="700px"
                     display="flex"
-                    borderRadius="4px"
-                    flex="2"
-                    width="100%"
-                    height="inherit"
-                  ></Image>                  
-                </Box>
-                <Description>
-                  <Span1
-                    fontWeight="500"
-                    fontSize="lg2"
-                    mb="4"
+                    justifyContent="center"
+                    alignItems="center"
                   >
-                    Descripción del producto
-                  </Span1>
-                  <Text>{item.description}</Text>
-                </Description>
-              </Box>
-              <BuyBox
-                p="4"
-                flex="1"
-              >
-                <Span2
-                  fontSize="sm2"
-                  mb="3"
-                >{item.condition === 'new' ? 'Nuevo' : 'Usado'} - {item.sold_quantity} vendidos</Span2>
-                <Span1>{item.title}</Span1>
-                <Span1
-                  fontSize="lg1"
-                  my="4"
-                >$ { price }</Span1>
-                <form>
-                  <Button width="100%">Comprar</Button>
-                </form>
-              </BuyBox>
-            </Product>
-          </Card>
-        </Box>
-      }
-    </Container>
+                    <Image
+                      alt="Imagen del producto"
+                      src={item.picture}
+                      display="flex"
+                      borderRadius="4px"
+                      flex="2"
+                      width="100%"
+                      height="inherit"
+                    ></Image>                  
+                  </Box>
+                  <Description>
+                    <Span1
+                      fontWeight="500"
+                      fontSize="lg2"
+                      mb="4"
+                    >
+                      Descripción del producto
+                    </Span1>
+                    <Text>{item.description}</Text>
+                  </Description>
+                </Box>
+                <BuyBox
+                  p="4"
+                  flex="1"
+                >
+                  <Span2
+                    fontSize="sm2"
+                    mb="3"
+                  >{item.condition === 'new' ? 'Nuevo' : 'Usado'} - {item.sold_quantity} vendidos</Span2>
+                  <Span1>{item.title}</Span1>
+                  <Span1
+                    fontSize="lg1"
+                    my="4"
+                  >$ { price }</Span1>
+                  <form>
+                    <Button width="100%">Comprar</Button>
+                  </form>
+                </BuyBox>
+              </Product>
+            </Card>
+          </Box>
+        }
+      </Container>
+    </>
   )
 }
 

@@ -24,6 +24,7 @@ export function ProductsProvider({ children }) {
       setPrice(response.data.price.amount);
     }).catch((error) => {
       setLoading(false);
+      window.location = '/*';
       throw new Error(error);
     }).finally(() => {
       setLoading(false);
@@ -37,6 +38,7 @@ export function ProductsProvider({ children }) {
       await setCategories(apiResponse.data.categories);
 
     } catch(error) {
+      window.location = '/*';
       throw new Error(error);
     } finally {
       setLoading(false);

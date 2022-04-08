@@ -50,7 +50,6 @@ function SearchBox() {
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery, limit } = useProductsContext();
   const { getSearchResults, setLoading } = useProductsContext();
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -59,8 +58,13 @@ function SearchBox() {
       q: searchQuery,
       limit,
     }
-    await getSearchResults(params);
-     navigate(`/items?search=${searchQuery}`);
+    try {
+      navigate('/');
+      await getSearchResults(params);
+      navigate(`/items?search=${searchQuery}`);
+    } catch {
+      navigate(`/*`);
+    }
   }
 
   return (

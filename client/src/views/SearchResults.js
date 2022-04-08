@@ -45,44 +45,46 @@ function SearchResults() {
   }, [products, categories, loading, item]);
 
   return (
-    <Container
-      as="main"
-      pt="0px"
-      pb="5"
-    >
-      {
-        (loading) &&
-        <Loading></Loading>
-      }
+    <>
       {
         ((products === undefined || products === null || products.length === 0) && !loading) &&
         <ErrorPage />
       }
-      {
-        (products && !loading) &&  
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          width="1184px"   
-        >
-          <BreadCrumbs />
-          <ProductsWrapper>
-            { products &&
-              products.map((product) => {
-                return (
-                    <ProductCard
-                      onClick={() => goToDetail(product.id)}
-                      key={product.id}
-                      item={product}                      
-                    ></ProductCard>
-                  )
-              })              
-            }
-          </ProductsWrapper>
-        </Box>
-      } 
-    </Container>
+      <Container
+        as="main"
+        pt="0px"
+        pb="5"
+      >
+        {
+          (loading) &&
+          <Loading></Loading>
+        }
+        {
+          (products && !loading) &&  
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            width="1184px"   
+          >
+            <BreadCrumbs />
+            <ProductsWrapper>
+              { products &&
+                products.map((product) => {
+                  return (
+                      <ProductCard
+                        onClick={() => goToDetail(product.id)}
+                        key={product.id}
+                        item={product}                      
+                      ></ProductCard>
+                    )
+                })              
+              }
+            </ProductsWrapper>
+          </Box>
+        } 
+      </Container>
+    </>
   )
 }
 
