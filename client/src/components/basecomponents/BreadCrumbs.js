@@ -20,7 +20,7 @@ const Breadcrumbs = styled.ul`
   ${shadow};  
 `;
 
-const Crumb = styled.li`
+export const Crumb = styled.li`
   display: inline-block;
 
   &:last-of-type:after {
@@ -44,7 +44,7 @@ function BreadCrumbs() {
 
   useEffect(() => {
   
-  }, [categories])
+  }, [categories]);
   
   return (
     <Breadcrumbs alignSelf="start">

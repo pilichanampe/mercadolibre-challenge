@@ -30,8 +30,6 @@ export function ProductsProvider({ children }) {
     }) 
   };
 
-
-
   const getSearchResults = async (params) => {
     try {
       const apiResponse = await axios.get('api/items', { params });
@@ -43,12 +41,11 @@ export function ProductsProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
 
-  }, [products, categories, item])
-  
+  }, [products, categories, item]);  
 
   return (
     <ProductsContext.Provider

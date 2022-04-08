@@ -4,7 +4,10 @@ import { Box } from './basecomponents/Box';
 import { Image } from './basecomponents/Image';
 import Logo from '../assets/icons/Logo_ML.png';
 import SearchBox from './SearchBox';
-import { Link } from 'react-router-dom';
+
+const MeliLogo = styled(Image)`
+  cursor: pointer;
+`;
 
 const Nav = styled(Box)`
   display: flex;
@@ -29,14 +32,15 @@ function Navbar() {
         alignItems="center"
         width="1184px"
       >
-        <Link to="/">
-          <Image
+        {/* <Link to="/"> */}
+          <MeliLogo
+            onClick={() => window.location = '/'}
             width="44px"
             src={Logo}
             alt="Logo de Mercado Libre"
             mr={4}
-          ></Image>
-        </Link>
+          ></MeliLogo>
+        {/* </Link> */}
         <SearchBox></SearchBox>
       </Box>
     </Nav>

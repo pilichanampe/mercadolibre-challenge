@@ -16,14 +16,11 @@ const ProductsWrapper = styled(Box)`
   width: 100%;
   background-color: ${({theme}) => theme.colors.n0};
   border-radius: 4px;
-`
-const StyledLink = styled(Link)`
-  width: 100%;
 `;
 
 function SearchResults() {
   const navigate = useNavigate();
-  const { item, itemId, products, setProducts, getSearchResults, limit, categories, loading, setLoading } = useProductsContext();
+  const { item, products, setProducts, getSearchResults, limit, categories, setCategories, loading, setLoading } = useProductsContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const goToDetail = (productId) => {

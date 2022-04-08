@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, Link, useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import { Box } from '../components/basecomponents/Box';
 import BreadCrumbs from '../components/basecomponents/BreadCrumbs'
@@ -11,6 +11,15 @@ import { useProductsContext } from '../context/ProductsContext';
 import { Span1, Span2, Text } from '../components/basecomponents/Text';
 import Loading from '../components/basecomponents/Loading';
 import ErrorPage from '../components/ErrorPage';
+
+const BackToList = styled.li`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 24px;
+  cursor: pointer;
+  padding-left: 4px;
+`;
 
 const Product = styled(Box)`
   display: flex;
@@ -34,9 +43,10 @@ const Description = styled(Box)`
 `;
 
 function ProductDetail() {
-  const { item, getItem, categories, setItem, loading, setLoading, price } = useProductsContext();
+  const { item, getItem, categories, setItem, loading, setLoading, price, getSearchResults } = useProductsContext();
   const params = useParams();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
  
   useEffect(() => {
     if (!item) {
@@ -69,9 +79,16 @@ function ProductDetail() {
           display="flex"
           flexDirection="column"
           alignItems="center"
-          width="1184px"   
+          width="1184px"
         >
-          <BreadCrumbs alignSelf="start"></BreadCrumbs>
+          <Box
+            alignSelf="start"
+            display="flex"
+            width="100%"
+          >
+            <BackToList onClick={() => navigate(-1)}>Volver al listado</BackToList>
+            <BreadCrumbs />
+          </Box>
           <Card>
             <Product>
               <Box
