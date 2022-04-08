@@ -60,7 +60,6 @@ function ProductDetail() {
         }
       }
       getProductDetail();
-      console.log(item);
     }
   }, [item, categories, loading, params, searchParams]);
 
