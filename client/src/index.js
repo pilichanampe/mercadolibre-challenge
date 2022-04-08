@@ -15,6 +15,7 @@ import {
 import ProductDetail from './views/ProductDetail';
 import SearchResults from './views/SearchResults';
 import { ProductsProvider } from './context/ProductsContext';
+import ErrorPage from './components/ErrorPage';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,8 +26,9 @@ ReactDOM.render(
             <Navbar></Navbar>
             <Routes>
               <Route path="/" element={<App />} />
-              <Route path="/items/:id" element={<ProductDetail />} />
+              <Route exacts path="/items/:id" element={<ProductDetail />} />
               <Route path="/items" element={<SearchResults />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </BrowserRouter>
         </ThemeProvider>

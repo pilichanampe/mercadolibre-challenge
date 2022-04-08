@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Box } from '../components/basecomponents/Box';
 import BreadCrumbs from '../components/basecomponents/BreadCrumbs'
@@ -10,6 +10,7 @@ import { Button } from '../components/basecomponents/Button';
 import { useProductsContext } from '../context/ProductsContext';
 import { Span1, Span2, Text } from '../components/basecomponents/Text';
 import Loading from '../components/basecomponents/Loading';
+import ErrorPage from '../components/ErrorPage';
 
 const Product = styled(Box)`
   display: flex;
@@ -35,18 +36,19 @@ const Description = styled(Box)`
 function ProductDetail() {
   const { item, getItem, categories, setItem, loading, setLoading, price } = useProductsContext();
   const params = useParams();
-  const { id } = params;
-
+  const [searchParams] = useSearchParams();
+ 
   useEffect(() => {
     if (!item) {
       setLoading(true);
       const getProductDetail = async () => {
-        // const { id } = params;
-        await setItem(getItem(id));
+        const { id } = params;
+        await setItem(() => getItem(id));
       }
       getProductDetail();
+      console.log(item);
     }
-  }, [item, categories, loading, params]);
+  }, [item, categories, loading, params, searchParams]);
 
   return (
     <Container
@@ -58,7 +60,11 @@ function ProductDetail() {
         <Loading></Loading>
       }
       {
-        (item && !loading) &&
+        ((typeof item !== 'object') && !loading) &&
+        <ErrorPage></ErrorPage>
+      }
+      {
+        (typeof item === 'object' && !loading) &&
         <Box
           display="flex"
           flexDirection="column"

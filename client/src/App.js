@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import API_SERVICE from './services/api.service';
-import { Link } from "react-router-dom";
-
-import { Button } from './components/basecomponents/Button';
-// import { useProductsContext } from './context/ProductsContext';
+import React from 'react';
+import { Container } from './components/basecomponents/Container';
+import { Span1 } from './components/basecomponents/Text';
 
 function App() {
   return (
-    <div>
-    </div>
+    <Container>
+      <Span1>¡Te damos la bienvenida a Mercado Libre Argentina! Buscá ese producto que querés :).</Span1>
+    </Container>
   )
 }
 

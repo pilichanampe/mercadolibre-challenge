@@ -23,8 +23,8 @@ export function ProductsProvider({ children }) {
       setItem(response.data);
       setPrice(response.data.price.amount);
     }).catch((error) => {
-      setLoading(false);    
-      return error;
+      setLoading(false);
+      throw new Error(error);
     }).finally(() => {
       setLoading(false);
     }) 

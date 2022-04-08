@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useSearchParams, useParams, useNavigate, Navigate, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { useProductsContext } from '../context/ProductsContext';
-import { Card } from '../components/basecomponents/Card';
-import { Button } from '../components/basecomponents/Button';
 import ProductCard from '../components/basecomponents/ProductCard';
 import { Box } from '../components/basecomponents/Box';
 import styled from 'styled-components';
 import { Container } from '../components/basecomponents/Container';
 import BreadCrumbs from '../components/basecomponents/BreadCrumbs';
-import { Span1, Span2 } from '../components/basecomponents/Text';
 import Loading from '../components/basecomponents/Loading';
+import ErrorPage from '../components/ErrorPage';
 
 const ProductsWrapper = styled(Box)`
   display: flex;
@@ -25,11 +22,16 @@ const StyledLink = styled(Link)`
 `;
 
 function SearchResults() {
-  // const searchQuery, setSearchQuery] = useSearchParams();
   const navigate = useNavigate();
-  const { getItem, itemId, products, getSearchResults, limit, categories, loading, setLoading } = useProductsContext();
+  const { item, itemId, products, setProducts, getSearchResults, limit, categories, loading, setLoading } = useProductsContext();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [results, setResults] = useState();
+
+  const goToDetail = (productId) => {
+    setLoading(true);
+    navigate(`/items/${productId}`);
+    window.history.go();
+
+  }
 
   useEffect(() => {
     if (!products) {
@@ -39,11 +41,11 @@ function SearchResults() {
           q: searchParams.get('search'),
           limit
         }
-        await setResults(getSearchResults(params));
+        await setProducts(getSearchResults(params));
       }
       getResults();
     }
-  }, [products, categories, loading]);
+  }, [products, categories, loading, item]);
 
   return (
     <Container
@@ -55,10 +57,10 @@ function SearchResults() {
         (loading) &&
         <Loading></Loading>
       }
-      {/* {
-        (!products && !loading) &&
-        <Span1 mt="4">!Ups! No encontramos el producto que estás buscando. Por favor, probá con una nueva búsqueda :).</Span1>
-      } */}
+      {
+        ((products === undefined || products === null || products.length === 0) && !loading) &&
+        <ErrorPage />
+      }
       {
         (products && !loading) &&  
         <Box
@@ -72,14 +74,11 @@ function SearchResults() {
             { products &&
               products.map((product) => {
                 return (
-                  <StyledLink
-                  to={`/items/${product.id}`}
-                  key={product.id}
-                  >
                     <ProductCard
+                      onClick={() => goToDetail(product.id)}
+                      key={product.id}
                       item={product}                      
                     ></ProductCard>
-                    </StyledLink>
                   )
               })              
             }
@@ -90,4 +89,4 @@ function SearchResults() {
   )
 }
 
-export default SearchResults
+export default SearchResults;

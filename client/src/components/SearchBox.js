@@ -49,25 +49,19 @@ const SearchButton = styled.button`
 function SearchBox() {
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery, limit } = useProductsContext();
-  const { getSearchResults, products } = useProductsContext();
+  const { getSearchResults, setLoading } = useProductsContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const params = {
       q: searchQuery,
       limit,
     }
     await getSearchResults(params);
-    navigate(`/items?search=${searchQuery}`);
-    // setSearchParams({ search: searchQuery});
+     navigate(`/items?search=${searchQuery}`);
   }
-
-  // useEffect(() => {  
-  //   return () => {
-  //   }
-  // }, [searchParams])
-  
 
   return (
     <>
