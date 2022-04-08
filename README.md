@@ -26,9 +26,5 @@ npm run dev
 - Instala las dependencias que figuran en el package.json del servidor.
 - Ejecuta el proyecto en dev.
 
-## Variables de entorno:
-- Utilicé un ``.env`` para almacenar las variables de entorno. Por cuestiones de seguridad, es un archivo ignorado y se dejó un dummy como ejemplo en el archivo ``.env.example``.
-- De todos modos, por ahora, este proyecto no está utilizando ninguna api key secreta, por lo que para correr el proyecto solo basta crear un archivo nuevo que se llame ``.env``, copiar y pegar las variables del dummy, o simplemente renombrar el ``.env.example`` por ``.env``.
-
 
 
