@@ -4,6 +4,10 @@ En este repo se encuentra el desafío creado por Mercado Libre para hacer un pro
 
 ## Para levantar el proyecto en dev
 
+- Versión de Node.js utilizada: ``16.13.1``
+- Puerto del cliente: ``3000``
+- Puerto del servidor: ``8080``
+
 Tanto cliente como servidor se ejecutan separadamente, por lo que hay que utilizar dos terminales. Para ejecutar cada uno, desde la carpeta raíz, tirar los siguientes comandos:
 
 **En la terminal del cliente:**
@@ -26,5 +30,6 @@ npm run dev
 - Instala las dependencias que figuran en el package.json del servidor.
 - Ejecuta el proyecto en dev.
 
-
-
+## Variables de entorno:
+Utilicé un .env para almacenar las variables de entorno. Por cuestiones de seguridad, es un archivo ignorado y se dejó un dummy como ejemplo en el archivo .env.example.
+De todos modos, por ahora, este proyecto no está utilizando ninguna api key secreta, por lo que para correr el proyecto solo basta crear un archivo nuevo que se llame .env, copiar y pegar las variables del dummy, o simplemente renombrar el .env.example por .env.
